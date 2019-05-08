@@ -17,7 +17,7 @@ public class StringNumGenerator {
 				return input;
 			}
 			if (input.contains(",") || input.contains("\n")) {
-				int sum = twoOrMoreNumbersSum(input);
+				double sum = twoOrMoreNumbersSum(input);
 				return String.valueOf(sum);
 			}
 		}
@@ -27,7 +27,7 @@ public class StringNumGenerator {
 	// szám?
 	public boolean isNumeric(String num) {
 		try {
-			Integer.parseInt(num);
+			Double.parseDouble(num);
 			return true;
 		} catch (NumberFormatException e) {
 			return false;
@@ -37,7 +37,7 @@ public class StringNumGenerator {
 	// kisebb mint 1000?
 	public boolean isLessThanThousands(String input) {
 		if (!input.isEmpty() && isNumeric(input)) {
-			int number = Integer.parseInt(input);
+			double number = Double.parseDouble(input);
 			if (number <= 1000) {
 				return true;
 			}
@@ -48,7 +48,7 @@ public class StringNumGenerator {
 	// pozitív vagy 0?
 	public boolean isPositiveOrZero(String input) {
 		if (!input.isEmpty() && isNumeric(input)) {
-			int number = Integer.parseInt(input);
+			double number = Double.parseDouble(input);
 			if (0 <= number) {
 				return true;
 			}
@@ -57,10 +57,10 @@ public class StringNumGenerator {
 	}
 
 	// hogyha 2 vagy több szám között vessző van, vagy új sor akkor összeadja
-	public int twoOrMoreNumbersSum(String input) {
-		int sum = 0;
+	public double twoOrMoreNumbersSum(String input) {
+		double sum = 0;
 		if (input.contains(",") || input.contains("\n")) {
-			List<Integer> numbers = splitString(input);
+			List<Double> numbers = splitString(input);
 			for (int i = 0; i < numbers.size(); i++) {
 				sum += numbers.get(i);
 			}
@@ -69,7 +69,7 @@ public class StringNumGenerator {
 	}
 
 	// listába gyűjti a vesszővel elválasztott vagy új sorban lévő számokat
-	public List<Integer> splitString(String input) {
+	public List<Double> splitString(String input) {
 		if (input.startsWith("//") && !input.contains(",")) {
 			Matcher m = Pattern.compile("//\\[(.*)\\]\n(.*)").matcher(input);
 			m.matches();
@@ -93,12 +93,12 @@ public class StringNumGenerator {
 	}
 
 	// számok listába gyűtése
-	public List<Integer> listOfNumbers(String[] inputArray) {
-		List<Integer> numberList = new ArrayList<Integer>();
+	public List<Double> listOfNumbers(String[] inputArray) {
+		List<Double> numberList = new ArrayList<Double>();
 		String[] inputNumbers = inputArray;
 		for (String num : inputNumbers) {
 			if (isNumeric(num) && isPositiveOrZero(num) && isLessThanThousands(num)) {
-				numberList.add(Integer.parseInt(num));
+				numberList.add(Double.parseDouble(num));
 			}
 		}
 		return numberList;

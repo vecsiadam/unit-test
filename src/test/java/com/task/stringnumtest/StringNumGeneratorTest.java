@@ -14,7 +14,7 @@ public class StringNumGeneratorTest {
 	
 	@Test
 	public void stringIsNumberReturnsNumber() {
-		assertEquals("200", stringNumGenerator.addString("200"));
+		assertEquals("200.01", stringNumGenerator.addString("200.01"));
 	}
 	
 	@Test
@@ -24,42 +24,42 @@ public class StringNumGeneratorTest {
 	
 	@Test
 	public void stringTwoNumbersReturnsSumDelimitedByComma() {
-		assertEquals("9",stringNumGenerator.addString("5,4"));
+		assertEquals("9.4",stringNumGenerator.addString("5,4.4"));
 	}
 	
 	@Test
 	public void stringMoreNumbersReturnsSumDelimitedByComma() {
-		assertEquals("16",stringNumGenerator.addString("5,4,7"));
+		assertEquals("16.5",stringNumGenerator.addString("5.5,4,7"));
 	}
 	
 	@Test
 	public void stringMoreNumbersReturnsSumDelimitedByCommaAndNewLine() {
-		assertEquals("22",stringNumGenerator.addString("5\n6,4\n7"));
+		assertEquals("22.3",stringNumGenerator.addString("5\n6,4.3\n7"));
 	}
 	
 	@Test
 	public void stringMoreNumbersReturnsSumDelimitedByCommaAndNewLineBigerThanThousandAndMinus() {
-		assertEquals("17",stringNumGenerator.addString("-5\n6,4\n7,10001"));
+		assertEquals("17.0",stringNumGenerator.addString("-5\n6,4\n7,10001"));
 	}
 	
 	
 	@Test
 	public void createCustomDelimiter() {
-		assertEquals("13",stringNumGenerator.addString("//[;]\n7;6"));
+		assertEquals("13.0",stringNumGenerator.addString("//[;]\n7;6"));
 	}
 	
 	@Test
 	public void customDelimiterIsSpecialChar() {
-		assertEquals("6",stringNumGenerator.addString("//[###]\n1###2###3"));
+		assertEquals("6.0",stringNumGenerator.addString("//[###]\n1###2###3"));
 	}
 	
 	@Test
 	public void customDelimiterIsSpecialCharWithnegativeNumberAndBigerThanThousands() {
-		assertEquals("3",stringNumGenerator.addString("//[**]\n1010**-2**1**2"));
+		assertEquals("3.0",stringNumGenerator.addString("//[**]\n1010**-2**1**2"));
 	}
 	
 	@Test
 	public void multipleDelimitersWithNegativeAndBigerThanThousands() {
-		assertEquals("14",stringNumGenerator.addString("//[;;],[*]\n1010*-2;;1;;2*4;;5*2"));
+		assertEquals("14.0",stringNumGenerator.addString("//[;;],[*]\n1010*-2;;1;;2*4;;5*2"));
 	}
 }
